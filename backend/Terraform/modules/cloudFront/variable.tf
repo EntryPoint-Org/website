@@ -21,3 +21,13 @@ variable "aws_cloudfront_distribution_acm_certificate_arn" {
   description = "acm certificate arn"
   default     = "arn:aws:acm:us-east-1::certificate/" #change for the real acm certificate arn forom the AWS Certificate Manager
 }
+
+variable "s3_bucket_bucket_domain_name" {
+  description = "The domain name of the S3 bucket"
+  type        = string
+}
+
+variable "s3_bucket_id" {
+  description = "The ID of the S3 bucket"
+  type        = string
+}

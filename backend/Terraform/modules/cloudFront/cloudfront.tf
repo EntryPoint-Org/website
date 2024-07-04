@@ -11,8 +11,8 @@ resource "aws_cloudfront_distribution" "cloudfront_dist" {
   is_ipv6_enabled     = true
 
   origin {
-    domain_name = module.s3_bucket.s3_bucket_bucket_domain_name
-    origin_id   = module.s3_bucket.s3_bucket_id
+    domain_name = var.s3_bucket_bucket_domain_name
+    origin_id   = var.s3_bucket_id
     origin_access_control_id = aws_cloudfront_origin_access_control.site_access.id
   }
 
@@ -26,7 +26,7 @@ resource "aws_cloudfront_distribution" "cloudfront_dist" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = module.s3_bucket.s3_bucket_id
+    target_origin_id = var.s3_bucket_id
 
     forwarded_values {
       query_string = false
