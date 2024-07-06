@@ -77,8 +77,8 @@ def lambda_handler(event, context):
         secret = get_secret()
         service = get_drive_service(secret)
 
-        entrypoint_drive_folder_id = os.environ['ENTRYPOINT_DRIVE_FOLDER_ID']
-        home_tasks_folder_id = os.environ['HOME_TASKS_FOLDER_ID']
+        entrypoint_drive_folder_id = secret['ENTRYPOINT_DRIVE_FOLDER_ID']
+        home_tasks_folder_id = secret['HOME_TASKS_FOLDER_ID']
 
         drive_count = count_files_in_folder(service, entrypoint_drive_folder_id)
         home_tasks_count = count_files_in_folder(service, home_tasks_folder_id)

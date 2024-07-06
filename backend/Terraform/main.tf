@@ -13,9 +13,8 @@ module "lambda_function_gda" {
   handler               = "google_drive_analytics.lambda_handler"  # Adjust according to your handler(function file name/handler function name)
   runtime               = "python3.9"
   environment_variables = {
-    VAR1 = "value1"
-    VAR2 = "value2"
+    SECRET_NAME               = "web_secret" #make sure to create this secret in secret manager, it will contain the credentials to the our google drive and all the secret we need
+    REGION_NAME               = var.region
   }
-  source_code_hash      = data.archive_file.lambda_function_1.output_base64sha256
 }
 
