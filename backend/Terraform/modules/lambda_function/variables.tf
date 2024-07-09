@@ -1,13 +1,13 @@
 variable "region" {
   description = "The AWS region to deploy to"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-west-1"
 }
 
 variable "s3_bucket" {
   description = "The S3 bucket containing the Lambda function code"
   type        = string
-  default     = "entrypoint_bucket"
+  default     = "entrypoint-website"
 }
 
 variable "s3_key" {
