@@ -29,8 +29,12 @@ jobs:
             CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
             echo "changed_files=$CHANGED_FILES" >> $GITHUB_ENV
         
-        - name: Sync to S3
-          run: aws s3 sync . s3://your-bucket-name # needs to change to the bucket name
+        - name: Sync to S3 # need to change bucket name
+          run: |
+            CHANGED_FILES=${{ env.changed_files }}
+            for file in $CHANGED_FILES; do
+                aws s3 cp "$file" "s3://bucket-name/$file" 
+            done
 
         - name: Prepare CloudFront invalidation paths # create list of all the files changed in the push and create prefixes
           id: prepare-paths
