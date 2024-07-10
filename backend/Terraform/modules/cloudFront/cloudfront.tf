@@ -15,12 +15,8 @@ resource "aws_cloudfront_distribution" "cloudfront_dist" {
     origin_id   = var.s3_bucket_id
     origin_access_control_id = aws_cloudfront_origin_access_control.site_access.id
   }
-
-  aliases = [var.aws_cloudfront_distribution_aliases]
-
   viewer_certificate {
-    acm_certificate_arn      = var.aws_cloudfront_distribution_acm_certificate_arn
-    ssl_support_method       = "sni-only"
+    ssl_support_method= "sni-only"
   }
 
   default_cache_behavior {
