@@ -1,3 +1,3 @@
 locals {
-  secret_name = "web_secret"  
+  secret_name = "google_credentials_secret_name"  
 }
