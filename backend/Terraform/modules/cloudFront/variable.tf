@@ -1,7 +1,7 @@
 variable "s3_bucket_website_index_document" {
   type        = string
   description = "the default file for the static website"
-  default     = "${path.module}/../../../frontend/posts.html"
+  default     = "posts.html"
 }
 
 variable "aws_cloudfront_origin_access_control_name" {
