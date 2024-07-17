@@ -16,19 +16,14 @@ resource "aws_iam_role" "iam_for_lambda" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
-data "archive_file" "lambda" {
-  type        = var.archive_type
-  source_file = var.source_file
-  output_path = var.output_path
-}
-
 resource "aws_lambda_function" "gda_lambda" {
-  filename      = var.output_path
-  function_name = var.function_name
-  role          = aws_iam_role.iam_for_lambda.arn
-  handler       = var.handler
-  source_code_hash = data.archive_file.lambda.output_base64sha256
-  runtime       = var.runtime
+  s3_bucket        = var.s3_bucket
+  s3_key           = var.s3_key
+  function_name    = var.function_name
+  role             = aws_iam_role.iam_for_lambda.arn
+  handler          = var.handler
+  source_code_hash = var.source_code_hash
+  runtime          = var.runtime
 
   environment {
     variables = var.environment_variables
