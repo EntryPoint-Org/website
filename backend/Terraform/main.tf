@@ -1,3 +1,14 @@
+module "s3_bucket" {
+  source = "./modules/s3"
+  cloudfront_distribution_arn   = module.cloudfront.cloudfront_distribution_arn
+}
+
+module "cloudfront" {
+  source = "./modules/cloudFront"
+  s3_bucket_bucket_domain_name = module.s3_bucket.s3_bucket_domain_name
+  s3_bucket_id = module.s3_bucket.s3_bucket_id
+}
+
 # Define S3 bucket object (source code) for Lambda function
 data "aws_s3_bucket_object" "lambda_zip_gda" {
   bucket = var.s3_bucket
@@ -20,4 +31,3 @@ module "lambda_function_gda" {
 
   }
 }
-

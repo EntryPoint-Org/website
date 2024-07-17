@@ -26,10 +26,10 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
       "Principal": {
         "Service": "cloudfront.amazonaws.com"
       },
-      "Resource": "arn:aws:s3:::${module.s3_bucket[0].s3_bucket_id}/*", 
+      "Resource": "arn:aws:s3:::${module.s3_bucket.s3_bucket_id}/*", 
       "Condition": {
         "StringEquals": {
-          "aws:SourceArn": "${aws_cloudfront_distribution.cloudfront_dist.arn}" 
+          "aws:SourceArn": "${var.cloudfront_distribution_arn}" 
         }
       }
     }
