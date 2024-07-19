@@ -18,8 +18,8 @@ jobs:
         - name: Configure AWS Credentials
           uses: aws-actions/configure-aws-credentials@v2
           with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            role-to-assume:
+                ROLE ARN HERE # need to put here role arn after role is created 
             aws-region: us-east-1  # needs to change to the correct region
 
         - name: Get list of changed files # insert all the changed files in to file 
@@ -36,14 +36,8 @@ jobs:
                 aws s3 cp "$file" "s3://bucket-name/$file" 
             done
 
-        - name: Prepare CloudFront invalidation paths # create list of all the files changed in the push and create prefixes
-          id: prepare-paths
-          run: |
-            CHANGED_FILES=${{ env.changed_files }}
-            INVALIDATION_PATHS=$(echo $CHANGED_FILES | tr ' ' '\n' | sed 's/^/\//') 
-            echo "invalidation_paths=$INVALIDATION_PATHS" >> $GITHUB_ENV
 
         - name: invalidate-cache
-          run: aws cloudfront create-invalidation --distribution-id distribution_ID --paths ${{ env.invalidation_paths }} #needs to change the ditribution_id
+          run: aws cloudfront create-invalidation --distribution-id distribution_ID --paths "/*" #needs to change the ditribution_id and the actual path
 
     
