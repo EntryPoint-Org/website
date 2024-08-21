@@ -1,7 +1,7 @@
 variable "s3_bucket_name" {
   type        = string
   description = "the name of the bucket"
-  default     = "website_entryPoint"
+  default     = "website-entrypoint"
 }
 
 variable "s3_bucket_website_index_document" {

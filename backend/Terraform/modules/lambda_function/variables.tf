@@ -7,7 +7,7 @@ variable "region" {
 variable "s3_bucket" {
   description = "The S3 bucket containing the Lambda function code"
   type        = string
-  default     = "entrypoint-website"
+  default     = "entrypoint-lambdas"
 }
 
 variable "s3_key" {
@@ -29,11 +29,6 @@ variable "runtime" {
   description = "The runtime environment for the Lambda function"
   type        = string
   default     = "python3.9"
-}
-
-variable "source_code_hash" {
-  description = "Base64-encoded SHA256 hash of the Lambda deployment package"
-  type        = string
 }
 
 variable "environment_variables" {

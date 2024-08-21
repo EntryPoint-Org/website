@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "cloudfront_dist" {
     origin_access_control_id = aws_cloudfront_origin_access_control.site_access.id
   }
   viewer_certificate {
-    ssl_support_method= "sni-only"
+    cloudfront_default_certificate = true
   }
 
   default_cache_behavior {
